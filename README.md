@@ -1,5 +1,6 @@
 # project-two-library-group
-project-two-library-group created by GitHub Classroom
+
+## project-two-library-group created by GitHub Classroom
 Revature Library Catalog
 User Stories:
 •	A librarian can view all checked out books
