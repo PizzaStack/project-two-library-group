@@ -1,0 +1,71 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  /* Change the link color to #111 (black) on hover */
+  li a:hover {
+    background-color: #111;
+  }
+
+  .topnav input[type=text] {
+    width: 230px;
+    left: 60%;
+    margin-top: 25px;
+    margin-right: 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('/assets/small-mag-glass.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+  }
+  
+  .topnav input[type=text]:focus {
+    width: 50%;
+  }
+
+  #searchBooks{
+    background-color: rgb(210,180,140);
+    color: white;
+    padding: 16px 10px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 5%;
+  }
+
+  #searchGroup{
+    height:30px;
+  }
+
+  .topnav .search-container #searchBooks {
+    float: left;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 0;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+  }
