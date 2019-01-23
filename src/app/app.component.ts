@@ -1,5 +1,4 @@
  import { Component } from '@angular/core';
- import { faCoffee } from '@fortawesome/fontawesome-svg-core;
  
 
 @Component({
@@ -9,5 +8,19 @@
 })
 export class AppComponent {
   title = 'The Revature Library';
-  faCoffee = faCoffee;
+
+  columnDefs = [
+    {headerName: 'Make', field: 'make'},
+    {headerName: 'Model', field: 'model'},
+    {headerName: 'Price', field: 'price'}
+];
+
+rowData = [
+   
+];
+ngOnInit() {
+  fetch('https://api.myjson.com/bins/15psn9')
+    .then(result => result.json())
+    .then(rowData => this.rowData = rowData);
+}
 }

@@ -33,7 +33,7 @@ ul {
     border-radius: 4px;
     font-size: 16px;
     background-color: white;
-    background-image: url('/magnifying_glass.jpg');
+    background-image: url('/assets/small-mag-glass.png');
     background-position: 10px 10px; 
     background-repeat: no-repeat;
     padding: 12px 20px 12px 40px;
@@ -46,13 +46,17 @@ ul {
   }
 
   #searchBooks{
-    background-color: #4CAF50;
+    background-color: rgb(210,180,140);
     color: white;
-    padding: 16px 20px;
+    padding: 16px 10px;
     margin: 8px 0;
     border: none;
     cursor: pointer;
     width: 5%;
+  }
+
+  #searchGroup{
+    height:30px;
   }
 
   .topnav .search-container #searchBooks {
