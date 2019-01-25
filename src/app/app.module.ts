@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AgGridModule } from 'ag-grid-angular';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faBell, faCircle } from '@fortawesome/free-regular-svg-icons';
@@ -9,18 +8,36 @@ import { faBell, faCircle } from '@fortawesome/free-regular-svg-icons';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
+import { AppHeaderComponent } from './app-header/app-header.component';
+import { Route, RouterModule } from '@angular/router';
 
- import { PatronComponent } from './patron/patron.component';
+
+import { FooterComponent } from './footer/footer.component';
+import {NavigationComponent} from './navigation/navigation.component';
+import { SidemenuComponent } from './sidemenu/sidemenu.component';
+import { HomeComponent } from './home/home.component';
+
+
+ //import { PatronComponent } from './patron/patron.component';
 // import { LibrarianComponent } from './librarian/librarian.component';
 // import { NavigationComponent } from './navigation/navigation.component';
+
+const ROUTES: Route[] = [
+  { path: '', redirectTo: '/', pathMatch: 'full' }
+ // { path: 'patron', component: PatronComponent}
+]
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-     PatronComponent,
+    AppHeaderComponent,
+    FooterComponent,
+    // PatronComponent,
     // LibrarianComponent,
-    // NavigationComponent,
+     NavigationComponent,
+    SidemenuComponent,
+    HomeComponent,
    
   ],
   imports: [
@@ -28,7 +45,8 @@ import { LoginComponent } from './login/login.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    AgGridModule.withComponents(null)
+    RouterModule
+    
     ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,21 +1,9 @@
-<div style="text-align:center">
+<div style="text-align:center" class="item3" id="logincomponent">
   <h1>
     Please {{ title }} For More Options!
   </h1>
 
-   <!-- <form [formGroup]="formdata" (ngSubmit) = "onClickSubmit(formdata.value)">
-           <div>
-                      <input type="text" formControlName="Username">
-                      <input type="password" formControlName="passwd">
-                      
-                      <button type="submit" [disabled] = "!formdata.valid">Login</button>
-            </div>
-    </form>
-    <p>Username entered is : {{Username}}</p> -->
-
-    <!-- <app-Login></app-Login> -->
-
-    <input type="button" onclick="document.getElementById('id01').style.display='block'" value="Login">
+   <input type="button" onclick="document.getElementById('id01').style.display='block'" value="Login">
 
   <div id="id01" class="modal">
       <span onclick="document.getElementById('id01').style.display='none'" 
@@ -26,18 +14,18 @@
           <img src="./assets/library-books.jpg" alt="Avatar" class="avatar">
         </div>
       
-        <div class="container">
+        <div class="logincontainer">
     <label for="username">Username</label>
     <input type="text" formControlName="Username" placeholder="email@xyz.com">
+    <p>Username entered is : {{Username}}</p>
     <label for="password">Password</label>
     <input type="password" formControlName="passwd" placeholder="password">
-    <input type="button" name="submit" value="Login" [disabled] = "!formdata.valid">
-    <div class="container">
+    <button type="button" name="submit" value="Login" [disabled] = "!formdata.valid" (click)="onLoginClick()" id="loginbutton"><a routerLink="/patron">Login</a></button>
+    <div class="logincontainer">
         <input style=" background-color: #f44336" type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn" value="Cancel Login">
     </div>
     </div>
   </form>
-  <h3>Username entered is : {{Username}}</h3>
 </div>
   <router-outlet></router-outlet>
   

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,7 +12,7 @@ export class LoginComponent implements OnInit {
 
   Username;
   formdata;
-  constructor() { }
+  constructor(private router: Router) { }
   title = 'Login';
   ngOnInit() {
     this.formdata = new FormGroup({
@@ -28,6 +29,11 @@ passwordvalidation(formcontrol) {
   }
 }
 onClickSubmit(data) {this.Username = data.Username;}
+@Input() public isUserLoggedIn: boolean;
+
+public onLoginClick(){
+  this.router.navigate(['./patron']);
+}
   }
 
 

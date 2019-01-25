@@ -1,4 +1,6 @@
- import { Component } from '@angular/core';
+ import { Component, Input, OnInit } from '@angular/core';
+ import { FormControl, FormGroup, Validators } from '@angular/forms';
+ import { Router } from '@angular/router';
  
 
 @Component({
@@ -8,19 +10,28 @@
 })
 export class AppComponent {
   title = 'The Revature Library';
+  Username;
+  formdata;
+  constructor(private router: Router) { }
 
-  columnDefs = [
-    {headerName: 'Make', field: 'make'},
-    {headerName: 'Model', field: 'model'},
-    {headerName: 'Price', field: 'price'}
-];
-
-rowData = [
+  ngOnInit() {
+    this.formdata = new FormGroup({
+      Username: new FormControl("", Validators.compose([
+        Validators.required,
+        Validators.pattern("[^ @]*@[^ @]*")])),
+      passwd: new FormControl("", this.passwordvalidation)
+    });
    
-];
-ngOnInit() {
-  fetch('https://api.myjson.com/bins/15psn9')
-    .then(result => result.json())
-    .then(rowData => this.rowData = rowData);
 }
+passwordvalidation(formcontrol) {
+  if (formcontrol.value.length < 5) {
+     return {"passwd" : true};
+  }
 }
+onClickSubmit(data) {this.Username = data.Username;}
+@Input() public isUserLoggedIn: boolean;
+
+public onLoginClick(){
+  this.router.navigate(['./patron']);
+}
+  }
