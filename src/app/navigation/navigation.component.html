@@ -1,0 +1,38 @@
+<div class="topnav"  *ngIf="!isUserLoggedIn">
+    <nav>
+<ul>
+   <li>
+     <a [routerLink]="['/home']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}" >Home</a>
+   </li>
+   <li>
+     <a href="#news">News</a>
+     </li>
+     <input type="text" placeholder="Search Books.." id="searchinput">
+     <button type="button" value="Search Books" id="searchBooks">Search</button>
+     
+ <li style="float:right">
+   <!-- <a routerLink="/login" >Login</a> -->
+   <input type="button" onclick="document.getElementById('id01').style.display='block'" value="Login" id="loginbutton">
+ </li>  
+</ul>
+</nav>
+</div>
+
+<div class="topnav" *ngIf="isUserLoggedIn">
+ <nav >
+ <ul>
+     <li>
+       <a href="#home">Home</a>
+     </li>
+     <li>
+       <a href="#news">News</a>
+       </li>
+       <input type="text" placeholder="Search Books..">
+       <button type="button" value="Search Books" id="searchBooks">Search</button>
+       
+   <li style="float:right">
+     <a routerLink="/login">Logout</a>
+   </li>  
+ </ul>
+ </nav>
+ </div>

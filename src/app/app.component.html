@@ -1,0 +1,43 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="container">
+  <div class="item1">
+  <app-app-header></app-app-header>
+  </div>
+  <div class="item2">
+  <app-navigation name="New name"></app-navigation>
+  </div>
+  
+  
+<div class="item3">
+  <router-outlet content></router-outlet>
+  </div>
+<div class="item4">
+<app-sidemenu></app-sidemenu>
+</div>
+<div class="item5">
+<app-footer></app-footer>
+</div>
+</div>
+<div id="id01" class="modal">
+  <span onclick="document.getElementById('id01').style.display='none'" 
+class="close" title="Close Modal">&times;</span>
+
+<form action="" class="modal-content animate" [formGroup]="formdata" (ngSubmit)="onClickSubmit(formdata.value)">
+  <div class="imgcontainer">
+      <img src="./assets/library-books.jpg" alt="Avatar" class="avatar">
+    </div>
+  
+    <div class="logincontainer">
+<label for="username">Username</label>
+<input type="text" formControlName="Username" placeholder="@xyz" (ngModel)="model.username" aria-describedby="basic-addon1" #name>
+<p>Username entered is : {{Username}}</p>
+<label for="password">Password</label>
+<input type="password" formControlName="passwd" placeholder="password" name="password">
+<button type="button" name="submit" value="Login" [disabled] = "!formdata.valid" id="loginbutton" (click)="onLoginClick()">Login</button>
+<div class="logincontainer">
+    <input style=" background-color: #f44336" type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn" value="Cancel Login">
+</div>
+</div>
+</form>
+</div>
+<!-- (click)="onLoginClick(username)"-->
