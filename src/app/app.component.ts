@@ -8,9 +8,11 @@
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'The Revature Library';
+export class AppComponent implements OnInit {
+  
+  title = 'Welcome Library Patrons';
   Username;
+  password;
   formdata;
   constructor(private router: Router) { }
 
@@ -28,10 +30,24 @@ passwordvalidation(formcontrol) {
      return {"passwd" : true};
   }
 }
-onClickSubmit(data) {this.Username = data.Username;}
+onClickSubmit(data) {
+  if(this.Username == data.Username){
+    console.log(this.Username + 'hello');
+    this.router.navigate(['/', 'patron']);
+  }else{
+    this.router.navigate(['/', 'login']);
+  }
+}
 @Input() public isUserLoggedIn: boolean;
 
 public onLoginClick(){
-  this.router.navigate(['./patron']);
+  
+  if(this.Username === "@jp"){
+    console.log(this.Username + 'hello');
+  this.router.navigate(['/', 'patron']);
+  }else{
+    console.log(this.Username);
+    this.router.navigate(['/', 'login']);
+  }
 }
   }
