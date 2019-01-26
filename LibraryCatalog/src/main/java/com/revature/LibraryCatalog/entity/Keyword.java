@@ -1,13 +1,18 @@
-package com.revature.LibraryCatalog;
+package com.revature.LibraryCatalog.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "keywrod")
+@Table(name = "keyword")
 public class Keyword {
 	
+	public Keyword() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	@Id
 	private int keywordID;
 	private String value;

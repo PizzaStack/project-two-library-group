@@ -1,4 +1,4 @@
-package com.revature.LibraryCatalog;
+package com.revature.LibraryCatalog.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -8,6 +8,10 @@ import javax.persistence.Table;
 @Table(name = "librarian")
 public class Librarian {
 
+	public Librarian() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	@Id
 	private int librarianID;
 	private String firstName;

@@ -1,4 +1,4 @@
-package com.revature.LibraryCatalog;
+package com.revature.LibraryCatalog.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,15 +9,15 @@ import javax.persistence.Table;
 public class LoginUser {
 	@Id
 	private int id;
-	private int libraryUserID;
+	private int userID;
 	private String username;
 	private String password;
 	private boolean isLibrarian;
 	
-	public LoginUser(int id, int libraryUserID, String username, String password, boolean isLibrarian) {
+	public LoginUser(int id, int userID, String username, String password, boolean isLibrarian) {
 		super();
 		this.id = id;
-		this.libraryUserID = libraryUserID;
+		this.userID = userID;
 		this.username = username;
 		this.password = password;
 		this.isLibrarian = isLibrarian;
@@ -30,11 +30,16 @@ public class LoginUser {
 		this.id = id;
 	}
 	public int getLibraryUserID() {
-		return libraryUserID;
+		return userID;
 	}
 	public void setLibraryUserID(int libraryUserID) {
-		this.libraryUserID = libraryUserID;
+		this.userID = libraryUserID;
 	}
+	public LoginUser() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getUsername() {
 		return username;
 	}

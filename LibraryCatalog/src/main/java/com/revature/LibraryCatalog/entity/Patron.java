@@ -1,4 +1,4 @@
-package com.revature.LibraryCatalog;
+package com.revature.LibraryCatalog.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,13 +9,17 @@ import java.io.Serializable;
 @Entity
 @Table(name = "patron")
 public class Patron implements Serializable {
-	
+
 	@Id
 	private int patronID;
+	@Column(name = "firstname")
 	private String firstName;
+	@Column(name = "lastname")
 	private String lastName;
 	private String address;
+	@Column(name = "phonenumber")
 	private long phoneNumber;
+	@Column(name = "emailaddress")
 	private String emailAddress;
 	
 	public Patron(int patronID, String firstName, String lastName, String address, long phoneNumber, String emailAddress) {
@@ -25,6 +29,10 @@ public class Patron implements Serializable {
 		this.address = address;
 		this.phoneNumber = phoneNumber;
 		this.emailAddress = emailAddress;
+	}
+	public Patron() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	@Column(name = "firstName")
@@ -50,7 +58,6 @@ public class Patron implements Serializable {
 	public void setPatronID(int patronID) {
 		this.patronID = patronID;
 	}
-	@Column(name = "address")
 	public String getAddress() {
 		return address;
 	}
@@ -62,11 +69,9 @@ public class Patron implements Serializable {
 	public long getPhoneNumber() {
 		return phoneNumber;
 	}
-	@Column(name = "phoneNumber")
 	public void setPhoneNumber(long phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	@Column(name = "emailaddress")
 	public String getEmailAddress() {
 		return emailAddress;
 	}
