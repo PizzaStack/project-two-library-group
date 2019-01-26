@@ -3,4 +3,8 @@
     font-size: 45px;
     font-family: 'Coda Caption', sans-serif;
     text-align: center;
+    background-color: bisque;
+    margin: 0;
+    height: 125px;
+    padding-top: 50px;
 }

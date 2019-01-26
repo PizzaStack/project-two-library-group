@@ -9,7 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { AppHeaderComponent } from './app-header/app-header.component';
 import { FooterComponent } from './footer/footer.component';
 import {NavigationComponent} from './navigation/navigation.component'
-import { SidemenuComponent } from './sidemenu/sidemenu.component';
+//import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { HomeComponent } from './home/home.component';
 
 
@@ -36,7 +36,7 @@ const ROUTES: Route[] = [
     FooterComponent,     
     // LibrarianComponent,
      NavigationComponent,
-    SidemenuComponent,
+   // SidemenuComponent,
    
    
   ],

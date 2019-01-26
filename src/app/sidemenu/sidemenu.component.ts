@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidemenuComponent implements OnInit {
 
+  itemone = "News";
+
   constructor() { }
 
   ngOnInit() {
