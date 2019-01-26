@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./patron.component.css']
 })
 export class PatronComponent implements OnInit {
+  
+  sidebar: HTMLElement = document.getElementById("item3");
+  
 
-  constructor() { }
+  constructor() { 
+    this.sidebar.innerHTML = '';
+  }
 
   ngOnInit() {
   }
 
-}
+};
