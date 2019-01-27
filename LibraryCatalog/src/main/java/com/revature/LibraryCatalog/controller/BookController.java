@@ -20,9 +20,13 @@ public class BookController {
 	@Autowired
 	BookDao dao;
 	
-	@GetMapping("/{title}")
-	public Book findBookByValue(@PathVariable("title") String title) {
+	@GetMapping("/book/{title}")
+	public Book findBookByTitle(@PathVariable("title") String title) {
 		return dao.findByTitle(title);
+	}
+	@GetMapping("/book/author/{author}")
+	public Book findBookByAuthor(@PathVariable("author")String author) {
+		return dao.findByAuthor(author);
 	}
 	
 	/*@GetMapping("/book{keyword}")

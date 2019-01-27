@@ -1,10 +1,18 @@
 package com.revature.LibraryCatalog.entity;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.io.Serializable;
 
+import org.hibernate.annotations.Where;
+
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "patron")
@@ -22,7 +30,7 @@ public class Patron implements Serializable {
 	@Column(name = "emailaddress")
 	private String emailAddress;
 	
-	public Patron(int patronID, String firstName, String lastName, String address, long phoneNumber, String emailAddress) {
+	public Patron(int patronID, String firstName, String lastName, String address, long phoneNumber, String emailAddress, List<Book> books) {
 		this.patronID = patronID;
 		this.firstName = firstName;
 		this.lastName = lastName;

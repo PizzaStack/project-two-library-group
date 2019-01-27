@@ -1,5 +1,6 @@
 package com.revature.LibraryCatalog.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -9,9 +10,11 @@ import javax.persistence.Table;
 public class LoginUser {
 	@Id
 	private int id;
+	@Column(name = "userid")
 	private int userID;
 	private String username;
 	private String password;
+	@Column(name = "islibrarian")
 	private boolean isLibrarian;
 	
 	public LoginUser(int id, int userID, String username, String password, boolean isLibrarian) {

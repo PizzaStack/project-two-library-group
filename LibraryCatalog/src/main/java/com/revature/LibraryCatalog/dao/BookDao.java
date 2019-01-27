@@ -16,6 +16,8 @@ import com.revature.LibraryCatalog.entity.Book;
 public interface BookDao extends JpaRepository<Book, Integer> {
 	
 	Book findByTitle(String title);
+	Book findByAuthor(String author);
+
 	
 /*	@Transactional
 	ArrayList<Book> findBooksByKeywor(String keyword){
