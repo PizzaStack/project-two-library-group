@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,7 +25,7 @@ public class PatronController {
 	@Autowired
 	PatronDao dao;
 	
-	@GetMapping("/Patron")
+	@GetMapping("/Patrons")
 	public List<Patron> getAll(){
 		return dao.findAll();
 	}
@@ -42,8 +43,5 @@ public class PatronController {
 		
 		return patronInformation;
 	}*/
-	@GetMapping("/Patron/{patronID}")
-	public List<Object>GetPatronInformation(@PathVariable("patronID") int patronID){
-		return dao.GetPatronInfo(patronID);
-	}
+	
 }

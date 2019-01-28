@@ -6,6 +6,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.revature.LibraryCatalog.entity.Book;
@@ -17,7 +18,8 @@ public interface BookDao extends JpaRepository<Book, Integer> {
 	
 	Book findByTitle(String title);
 	Book findByAuthor(String author);
-
+	@Query("select b from Book b where b.patron.patronID = :patronID")
+	List<Book> getBooksByLoggedInPatron(int patronID);
 	
 /*	@Transactional
 	ArrayList<Book> findBooksByKeywor(String keyword){

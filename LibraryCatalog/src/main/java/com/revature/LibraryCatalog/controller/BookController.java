@@ -2,6 +2,8 @@ package com.revature.LibraryCatalog.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,13 +22,23 @@ public class BookController {
 	@Autowired
 	BookDao dao;
 	
-	@GetMapping("/book/{title}")
+	@GetMapping("/Book/{title}")
 	public Book findBookByTitle(@PathVariable("title") String title) {
 		return dao.findByTitle(title);
 	}
-	@GetMapping("/book/author/{author}")
+	@GetMapping("/Book/author/{author}")
 	public Book findBookByAuthor(@PathVariable("author")String author) {
 		return dao.findByAuthor(author);
+	}
+	@GetMapping("Book/LoggedInPatron")
+	public List<Book> getBooksByLoggedInUser(HttpSession session ){
+		int patronID = (int) session.getAttribute("userID");
+		List<Book>books =  dao.getBooksByLoggedInPatron(patronID);
+		for(Book book: books) {
+			book.setPatron(null);
+		}
+		return books;
+		
 	}
 	
 	/*@GetMapping("/book{keyword}")

@@ -14,13 +14,10 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "book")
 public class Book {
 	@Id
-	//@Column(name = "bookid")
 	private int bookID;
 	@Column(name = "title")
 	private String title;
-	//@Column(name = "author")
 	private String author;
-	//@Column(name = "ibsn")
 	private long ibsn;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name = "keyword1")
@@ -35,9 +32,12 @@ public class Book {
 	private String coverimageurl;
 	@Column(name = "description")
 	private String description;
+/*	@Column(name = "patronid")
+	private int patron_ID;*/
+
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name = "patronid")
-	private Patron patronid;
+	private Patron patron;
 	
 	public Book() {
 		super();
@@ -45,7 +45,7 @@ public class Book {
 	}
 
 	public Book(int bookID, String title, String author, long ibsn, Keyword keyword1, Keyword keyword2, Keyword keyword3,
-			String coverimageurl, String description, Patron patronid) {
+			String coverimageurl, String description) {
 		super();
 		this.bookID = bookID;
 		this.title = title;
@@ -56,7 +56,7 @@ public class Book {
 		this.keyword3 = keyword3;
 		this.coverimageurl = coverimageurl;
 		this.description = description;
-		this.patronid = patronid;
+		//this.patron = patron;
 	}
 	public int getBookID() {
 		return bookID;
@@ -122,12 +122,13 @@ public class Book {
 		this.description = description;
 	}
 	public Patron getPatron() {
-		return patronid;
+		return patron;
 	}
 
-	public void setPatron(Patron patronid) {
-		this.patronid = patronid;
+	public void setPatron(Patron patron) {
+		this.patron = patron;
 	}
+
 	
 
 }
