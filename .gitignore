@@ -42,3 +42,9 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+/Patron.java
+/LoginUser.java
+/Librarian.java
+/Keyword.java
+/Book.java
+/LibraryCatalog/src/test/java/com/revature/LibraryCatalog/LibraryCatalogApplicationTests.java
