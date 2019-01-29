@@ -1,4 +1,30 @@
-<app-app-header title="Momentz-4-ever"
-            [isUserLoggedIn]="true" ></app-app-header>
+<!-- <app-app-header title="Momentz-4-ever"
+            [isUserLoggedIn]="true" ></app-app-header> -->
+<div class="container" id="patronpage">
+   
+    <div class="item4" id="sidebar">
+        <ul>
+          <li><a href="#">{{ listitemone }}</a></li>
+          <li><a href="#">{{ listitemtwo }}</a></li>
+          <li><a href="#">{{ listitemthree }}</a></li>
+          <li><a href="#">{{ listitemfour }}</a></li>
+        </ul>
+    </div>
+      <div class="item3" id="patronbody">
+          <label>Checked out books:</label><br> 
+          <table id="checkedouttable">
+                <th>Cover Image</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Due Date</th>
+          </table>
 
-    Welcome, you are now logged in!!!
+          <br><br><label>Book History:</label><br>
+          <table id="bookhistorytable">
+                <th>Cover Image</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Check-out Date</th>
+          </table>
+        </div>
+</div>
