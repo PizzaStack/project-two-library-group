@@ -1,7 +1,7 @@
 #home{
     font-size: 25px;
     background-color: beige;
-    border: 1px solid green;
+    
     padding: 20px;
 }
 .mainhome{
@@ -15,7 +15,7 @@
     padding-top:20px;
     padding-left: 10px;
     padding-right: 20px;
-    border: 1px solid red;
+   
     margin-top: 0;
     width: 300px;
 }
@@ -62,7 +62,7 @@
     grid-gap: 10px; 
     padding: 10px;
      min-height: 100%;
-     border: 1px solid blue;
+    
     }
     
     .homecontainer > div {

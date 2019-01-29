@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Route, RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
+import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -14,6 +15,7 @@ import { HomeComponent } from './home/home.component';
 
 
  import { PatronComponent } from './patron/patron.component';
+
 // import { LibrarianComponent } from './librarian/librarian.component';
 // import { NavigationComponent } from './navigation/navigation.component';
 
@@ -36,9 +38,7 @@ const ROUTES: Route[] = [
     FooterComponent,     
     // LibrarianComponent,
      NavigationComponent,
-   // SidemenuComponent,
-   
-   
+     
   ],
   imports: [
     BrowserModule,
@@ -46,7 +46,7 @@ const ROUTES: Route[] = [
     ReactiveFormsModule,
     RouterModule,
     AppRoutingModule,
-    
+    TextInputAutocompleteModule
     ],
   providers: [],
   bootstrap: [AppComponent]

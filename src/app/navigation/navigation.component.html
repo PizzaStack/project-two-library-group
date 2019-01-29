@@ -7,7 +7,8 @@
    <li>
      <a href="#news">News</a>
      </li>
-     <input type="text" placeholder="Search Books.." id="searchinput">
+     <app-search></app-search>
+     <input type="text" placeholder="Search Books.." id="searchinput" (event)="onSerachType($event.target.value)">
      <button type="button" value="Search Books" id="searchBooks">Search</button>
      
  <li style="float:right">
