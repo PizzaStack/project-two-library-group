@@ -4,10 +4,9 @@
    
     <div class="item4" id="sidebar">
         <ul>
-          <li><a href="#">{{ listitemone }}</a></li>
-          <li><a href="#">{{ listitemtwo }}</a></li>
-          <li><a href="#">{{ listitemthree }}</a></li>
-          <li><a href="#">{{ listitemfour }}</a></li>
+          <li><button #listitemoneElement (click)="viewFines()">{{ listitemone }}</button></li>
+          <li><button id="listitemtwo" (click)="viewAccountInfo()">{{ listitemtwo }}</button></li>
+          <li><button id="listitemthree" (click)="requestBook()">{{ listitemthree }}</button></li>
         </ul>
     </div>
 
@@ -27,5 +26,7 @@
                 <th>Author</th>
                 <th>Check-out Date</th>
           </table>
+          <div #fine>Something</div>
         </div>
+        
 </div>

@@ -1,4 +1,5 @@
-import { Component, OnInit, NgModule } from '@angular/core';
+import { Component, OnInit, NgModule, ElementRef, ViewChild } from '@angular/core';
+
 
 
 @Component({
@@ -6,19 +7,29 @@ import { Component, OnInit, NgModule } from '@angular/core';
   templateUrl: './patron.component.html',
   styleUrls: ['./patron.component.css']
 })
-
 export class PatronComponent implements OnInit {
   
  
   listitemone = 'View Fines';
   listitemtwo = 'Account Information';
   listitemthree = 'Request a Book';
-  listitemfour = '';
+  
 
   constructor() {  
-  }
+   
+    
+  };
 
   ngOnInit() {
-  }
-
+    
+  };
+ viewFines() {
+   console.log('clicked')
+ };
+ viewAccountInfo() {
+  console.log('clicked')
+};
+requestBook() {
+  console.log('clicked')
+};
 };
