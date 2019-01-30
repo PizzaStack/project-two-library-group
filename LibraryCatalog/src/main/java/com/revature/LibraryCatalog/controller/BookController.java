@@ -1,6 +1,12 @@
 package com.revature.LibraryCatalog.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,13 +20,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.LibraryCatalog.entity.Book;
 import com.revature.LibraryCatalog.entity.Keyword;
+import com.google.gson.Gson;
 import com.revature.LibraryCatalog.dao.BookDao;
 import com.revature.LibraryCatalog.dao.KeywordDao;
+import com.revature.LibraryCatalog.dao.PatronDao;
 
 @RestController
 public class BookController {
 	@Autowired
 	BookDao dao;
+	PatronDao pDao;
 	
 	@GetMapping("/Book/{title}")
 	public Book findBookByTitle(@PathVariable("title") String title) {
@@ -31,13 +40,39 @@ public class BookController {
 		return dao.findByAuthor(author);
 	}
 	@GetMapping("Book/LoggedInPatron")
-	public List<Book> getBooksByLoggedInUser(HttpSession session ){
+	public String getBooksByLoggedInUser(HttpSession session ){
 		int patronID = (int) session.getAttribute("userID");
 		List<Book>books =  dao.getBooksByLoggedInPatron(patronID);
 		for(Book book: books) {
 			book.setPatron(null);
 		}
-		return books;
+		Gson gson = new Gson();
+		String jsonBooks = gson.toJson(books);
+		return jsonBooks;
+		
+	}
+	@GetMapping("Book/Checkout/{title}")
+	public String checkOutBook(@PathVariable("title")String title, HttpSession session) {
+		Book book = dao.findByTitle(title);
+		if(book == null) {
+			return "Sorry that book is not available for checkout";
+		}
+		
+
+		String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+		Date date = null;
+		try {
+			date = format.parse(timeStamp);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "Something went wrong";
+		}
+		book.setDatecheckedout(date);
+		int patronID = (int) session.getAttribute("userID");
+		book.setPatron(pDao.findById(patronID));
+		return "Your book was successfully submitted";
 		
 	}
 	

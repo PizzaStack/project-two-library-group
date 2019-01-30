@@ -1,5 +1,7 @@
 package com.revature.LibraryCatalog.entity;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,11 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "book")
 public class Book {
+	private static final String TemporalType = null;
 	@Id
 	private int bookID;
 	@Column(name = "title")
@@ -38,6 +42,9 @@ public class Book {
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name = "patronid")
 	private Patron patron;
+	
+	@Temporal(javax.persistence.TemporalType.TIMESTAMP)
+	private Date datecheckedout;
 	
 	public Book() {
 		super();
@@ -127,6 +134,14 @@ public class Book {
 
 	public void setPatron(Patron patron) {
 		this.patron = patron;
+	}
+
+	public Date getDatecheckedout() {
+		return datecheckedout;
+	}
+
+	public void setDatecheckedout(Date datecheckedout) {
+		this.datecheckedout = datecheckedout;
 	}
 
 	
