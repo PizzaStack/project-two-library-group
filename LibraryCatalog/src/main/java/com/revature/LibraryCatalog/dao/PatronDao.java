@@ -19,7 +19,8 @@ public interface PatronDao extends JpaRepository<Patron, Integer> {
 			+ "FROM Patron p JOIN LoginUser lu ON p.patronID = lu.userID WHERE p.patronID = :patronID")
 	public Object GetPatronInfo(int patronID);
 	
-	public Patron findById(int id);
+	@Query("select p from Patron p where p.patronID=:id")
+	public Patron findByPatronID(int id);
 	
 	}
 

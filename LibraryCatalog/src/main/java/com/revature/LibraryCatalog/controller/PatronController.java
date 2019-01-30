@@ -43,5 +43,9 @@ public class PatronController {
 		
 		return patronInformation;
 	}*/
+	@GetMapping("/Patrons/{patronID}")
+		public Patron getPatron(@PathVariable("patronID")int patronID) {
+			return dao.findByPatronID(patronID);
+		}
+	}
 	
-}

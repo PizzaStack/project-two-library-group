@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.LibraryCatalog.entity.Book;
 import com.revature.LibraryCatalog.entity.Keyword;
+import com.revature.LibraryCatalog.entity.Patron;
 import com.google.gson.Gson;
 import com.revature.LibraryCatalog.dao.BookDao;
 import com.revature.LibraryCatalog.dao.KeywordDao;
@@ -29,6 +30,7 @@ import com.revature.LibraryCatalog.dao.PatronDao;
 public class BookController {
 	@Autowired
 	BookDao dao;
+	@Autowired
 	PatronDao pDao;
 	
 	@GetMapping("/Book/{title}")
@@ -71,7 +73,9 @@ public class BookController {
 		}
 		book.setDatecheckedout(date);
 		int patronID = (int) session.getAttribute("userID");
-		book.setPatron(pDao.findById(patronID));
+		Patron patron = pDao.findByPatronID(patronID);
+		book.setPatron(patron);
+		dao.save(book);
 		return "Your book was successfully submitted";
 		
 	}
