@@ -17,4 +17,15 @@ public interface LoginUserDao extends JpaRepository<LoginUser, Integer> {
 	public LoginUser getByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 	
 	public LoginUser getById(int id);
+	public LoginUser getByUserID(int id);
+	
+	@Query("SELECT MAX(lu.id) FROM LoginUser lu")
+	public int getMaxId();
+	@Query("SELECT MAX(lu.userID) FROM LoginUser lu")
+	public int getMaxUserId();
+	
+	@Query("Select lu.userID from LoginUser lu where lu.username = :username")
+	public int getUserIdByUsername(String username);
+	
+	
 }

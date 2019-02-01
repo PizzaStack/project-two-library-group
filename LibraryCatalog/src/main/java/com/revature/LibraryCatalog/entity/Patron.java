@@ -26,11 +26,11 @@ public class Patron implements Serializable {
 	private String lastName;
 	private String address;
 	@Column(name = "phonenumber")
-	private long phoneNumber;
+	private Long phoneNumber;
 	@Column(name = "emailaddress")
 	private String emailAddress;
 	
-	public Patron(int patronID, String firstName, String lastName, String address, long phoneNumber, String emailAddress, List<Book> books) {
+	public Patron(int patronID, String firstName, String lastName, String address, Long phoneNumber, String emailAddress) {
 		this.patronID = patronID;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -74,7 +74,7 @@ public class Patron implements Serializable {
 		this.address = address;
 	}
 
-	public long getPhoneNumber() {
+	public Long getPhoneNumber() {
 		return phoneNumber;
 	}
 	public void setPhoneNumber(long phoneNumber) {

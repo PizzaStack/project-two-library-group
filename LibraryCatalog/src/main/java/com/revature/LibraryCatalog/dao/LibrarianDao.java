@@ -13,4 +13,6 @@ public interface LibrarianDao extends JpaRepository<Librarian, Integer> {
 	@Query("select l.firstName, l.lastName, lu.username, lu.password, l.librarianID  "
 			+ "FROM Librarian l JOIN LoginUser lu ON l.librarianID = lu.userID WHERE l.librarianID = :librarianID")
 	public Object GetLibrarianInfo(int librarianID);
+	
+	public Librarian getBylibrarianID(int librarianID);
 }

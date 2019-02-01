@@ -11,6 +11,7 @@ import java.util.Locale;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,7 @@ import com.revature.LibraryCatalog.entity.Patron;
 import com.google.gson.Gson;
 import com.revature.LibraryCatalog.dao.BookDao;
 import com.revature.LibraryCatalog.dao.KeywordDao;
+import com.revature.LibraryCatalog.dao.LoginUserDao;
 import com.revature.LibraryCatalog.dao.PatronDao;
 
 @RestController
@@ -32,23 +34,67 @@ public class BookController {
 	BookDao dao;
 	@Autowired
 	PatronDao pDao;
+	@Autowired
+	LoginUserDao luDao;
 	
-	@GetMapping("/Book/{title}")
-	public Book findBookByTitle(@PathVariable("title") String title) {
-		return dao.findByTitle(title);
+	@GetMapping("/Book/title/{title}")
+	@CrossOrigin(origins = "http://localhost.4200")
+	public Object findBookByTitle(@PathVariable("title") String title) {
+		Book book = dao.findByTitle(title);
+		if(book == null) {
+			return "No matching books found";
+		}
+		return book;
 	}
 	@GetMapping("/Book/author/{author}")
+	@CrossOrigin(origins = "http://localhost.4200")
 	public Book findBookByAuthor(@PathVariable("author")String author) {
 		return dao.findByAuthor(author);
 	}
+	@GetMapping("Book/parameter/{parameter}")
+	@CrossOrigin(origins = "http://localhost.4200")
+	public Object findBooksByParameter(@PathVariable("parameter")String parameter){
+		List<Book> books = dao.getBooksByParamter(parameter);
+		if(books.isEmpty()) {
+			return "Sorry no books where found with matching criteria";
+		}
+		else {
+			Date date = getLibraryStartDate();
+			for(Book book: books) {
+				if(book.getDatecheckedout().before(date)) {
+					book.setDatecheckedout(null);
+				}
+			}
+			return books;
+		}
+		
+	}
+	
 	@GetMapping("Book/LoggedInPatron")
+	@CrossOrigin(origins = "http://localhost.4200")
 	public String getBooksByLoggedInUser(HttpSession session ){
 		int patronID = (int) session.getAttribute("userID");
 		List<Book>books =  dao.getBooksByLoggedInPatron(patronID);
+		for(Book book: books) {
+			book.setPatron(null);
+		}
 		Gson gson = new Gson();
 		return gson.toJson(books);
 	}
+	@GetMapping("Book/Patron/{patronUsername}")
+	@CrossOrigin(origins = "http://localhost.4200")
+	public String getBooksByPatronUsername(@PathVariable("patronUsername")String patronUsername) {
+		int patronID = luDao.getUserIdByUsername(patronUsername);
+		List<Book>books =  dao.getBooksByLoggedInPatron(patronID);
+		for(Book book: books) {
+			book.setPatron(null);
+		}
+		Gson gson = new Gson();
+		return gson.toJson(books);
+	}
+	
 	@GetMapping("Book/Checkout/{title}")
+	@CrossOrigin(origins = "http://localhost.4200")
 	public String checkOutBook(@PathVariable("title")String title, HttpSession session) {
 		Book book = dao.findByTitle(title);
 		DateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
@@ -71,6 +117,7 @@ public class BookController {
 		return "Your book was successfully checked out.";
 	}
 	@GetMapping("Book/Return/{title}")
+	@CrossOrigin(origins = "http://localhost.4200")
 	public String ReturnBook(@PathVariable("title")String title) {
 		Book book = dao.findByTitle(title);
 		Date date = getLibraryStartDate();
@@ -81,14 +128,18 @@ public class BookController {
 		if(book.getDatecheckedout().before(date)) {
 			return "This book is already currently checked out";
 		}
-		book.setDatecheckedout(null);
-		book.setPatron(null);
+		book.setDatecheckedout(date);
+		book.setPatron(pDao.findByPatronID(0));
 		dao.save(book);
 		return "Your book was successfully checked out.";
 	}
 	@GetMapping("Book/GetBooksCheckedOut")
+	@CrossOrigin(origins = "http://localhost.4200")
 	public String getBooksCheckedOut() {
 		List<Book> books = dao.getBooksCheckedOut();
+		for(Book book: books) {
+			book.setDescription(null);
+		}
 		Gson gson = new Gson();
 		return gson.toJson(books);
 	}

@@ -35,7 +35,7 @@ public class LoginUserController {
 	
 	@GetMapping("/LoginUser/{username}/{password}")
 	@CrossOrigin(origins = "http://localhost.4200")
-	public Object LogUserIn(@PathVariable("username") String username, @PathVariable("password") String password,
+	public Object logUserIn(@PathVariable("username") String username, @PathVariable("password") String password,
 			HttpSession session) {
 		LoginUser lu = dao.getByUsernameAndPassword(username, password);
 		if(lu == null) {
@@ -51,13 +51,15 @@ public class LoginUserController {
 		
 	}
 	@GetMapping("/LoginUser/Logout")
-	public LoginUser LogUserOut(HttpSession session) {
+	@CrossOrigin(origins = "http://localhost.4200")
+	public LoginUser logUserOut(HttpSession session) {
 		session.invalidate();
 		return dao.getById(12);
 		
 	}
 	@GetMapping("/LoginUser/Info")
-	public Object GetUserInformation(HttpSession session){
+	@CrossOrigin(origins = "http://localhost.4200")
+	public Object getUserInformation(HttpSession session){
 		int userID = 0;
 		userID = (int) session.getAttribute("userID");
 		if((boolean) session.getAttribute("isLibrarian")) {
@@ -67,5 +69,6 @@ public class LoginUserController {
 			return pDao.GetPatronInfo(userID);
 		}
 	}
+	
 	
 }
