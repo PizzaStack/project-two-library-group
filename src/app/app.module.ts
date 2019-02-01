@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Route, RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
+import { HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -12,17 +13,24 @@ import { FooterComponent } from './footer/footer.component';
 import {NavigationComponent} from './navigation/navigation.component'
 //import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { HomeComponent } from './home/home.component';
+import {LibrarianComponent} from './librarian/librarian.component'
+import { AuthenticationService} from './_services/authentication.service'
 
 
  import { PatronComponent } from './patron/patron.component';
+import { RegisterNewPatronComponent } from './register-new-patron/register-new-patron.component';
+import { SearchBooksComponent } from './search-books/search-books.component';
+import { ShowBookComponent } from './show-book/show-book.component';
 
 // import { LibrarianComponent } from './librarian/librarian.component';
 // import { NavigationComponent } from './navigation/navigation.component';
 
 const ROUTES: Route[] = [
  
-  {path: 'login', component: LoginComponent},
-  { path: 'patron', component: PatronComponent},
+  // {path: 'login', component: LoginComponent},
+  // { path: 'librarian', component: LibrarianComponent},
+  // { path: 'patron', component: PatronComponent},  
+  // { path: 'home', component: HomeComponent},
   { path: '', component: HomeComponent, pathMatch: 'full' }
  
 ]
@@ -33,22 +41,25 @@ const ROUTES: Route[] = [
     AppHeaderComponent,
     HomeComponent,
     LoginComponent,
-    PatronComponent,
-    
+    PatronComponent,    
     FooterComponent,     
-    // LibrarianComponent,
-     NavigationComponent,
+    LibrarianComponent,
+     NavigationComponent, 
+     RegisterNewPatronComponent, 
+     SearchBooksComponent, 
+     ShowBookComponent,
      
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
     AppRoutingModule,
     TextInputAutocompleteModule
     ],
-  providers: [],
+  providers: [AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
