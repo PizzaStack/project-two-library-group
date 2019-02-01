@@ -3,7 +3,7 @@ export class book{
     public bookid: number,
     public title: string,
     public author: string,
-    public isbn: number,
+    public ibsn: number,
     public keyword1: number,
     public keyword2: number,
     public keyword3: number,
