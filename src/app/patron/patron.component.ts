@@ -10,9 +10,10 @@ import { Component, OnInit, NgModule, ElementRef, ViewChild } from '@angular/cor
 export class PatronComponent implements OnInit {
   
  
-  listitemone = 'View Fines';
+  
   listitemtwo = 'Account Information';
   listitemthree = 'Request a Book';
+  listitemfour = 'Dashboard';
   
 
   constructor() {  
@@ -23,13 +24,36 @@ export class PatronComponent implements OnInit {
   ngOnInit() {
     
   };
- viewFines() {
-   console.log('clicked')
- };
+  
+  @ViewChild('patronbody') bodyDiv: ElementRef;
+ 
  viewAccountInfo() {
-  console.log('clicked')
+  this.bodyDiv.nativeElement.innerHTML = '<h3>Account Information</h3><label>Name:</label><span #name></span><br><br><label>Phone Number:</label><span #number></span><br><br><label>Email Address:</label><span #email></span><br><br><label>Address:</label><span #address></span>';
+  
 };
 requestBook() {
-  console.log('clicked')
+  this.bodyDiv.nativeElement.innerHTML = `<h3>Book Request Form</h3><form>
+  <input type="text" placeholder="Book title" #booktitle><br><br>
+  <input type="text" placeholder="ISBN" #isbn><br><br>
+  <button type="button" (click)="submitRequest()"=>Submit</button>
+</form>`;
+ 
+};
+dashboard(){
+  this.bodyDiv.nativeElement.innerHTML = `<label>Checked out books:</label><br>
+  <table id="checkedouttable">
+  <th>Cover Image</th>
+  <th>Title</th>
+  <th>Author</th>
+  <th>Due Date</th>
+</table>
+
+<br><br><label>Book History:</label><br>
+<table id="bookhistorytable">
+  <th>Cover Image</th>
+  <th>Title</th>
+  <th>Author</th>
+  <th>Check-out Date</th>
+</table><div #fine><br><span #balance>Balance Due: $0.01</span></div>`
 };
 };

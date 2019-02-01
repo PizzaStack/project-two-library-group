@@ -4,13 +4,13 @@
    
     <div class="item4" id="sidebar">
         <ul>
-          <li><button #listitemoneElement (click)="viewFines()">{{ listitemone }}</button></li>
-          <li><button id="listitemtwo" (click)="viewAccountInfo()">{{ listitemtwo }}</button></li>
-          <li><button id="listitemthree" (click)="requestBook()">{{ listitemthree }}</button></li>
+          <li><button type="button" id="listitemtwo" (click)="viewAccountInfo()">{{ listitemtwo }}</button></li>
+          <li><button type="button" id="listitemthree" (click)="requestBook()">{{ listitemthree }}</button></li>
+          <li><button type="button" id="listitemfour" (click)="dashboard()">{{ listitemfour }}</button></li>
         </ul>
     </div>
 
-      <div class="item3" id="patronbody">
+      <div class="item3" id="patronbody" #patronbody>
           <label>Checked out books:</label><br> 
           <table id="checkedouttable">
                 <th>Cover Image</th>
@@ -18,7 +18,6 @@
                 <th>Author</th>
                 <th>Due Date</th>
           </table>
-
           <br><br><label>Book History:</label><br>
           <table id="bookhistorytable">
                 <th>Cover Image</th>
@@ -26,7 +25,10 @@
                 <th>Author</th>
                 <th>Check-out Date</th>
           </table>
-          <div #fine>Something</div>
+          <div #fine>
+            <br><span #balance>Balance Due: $0.00</span>
+          </div>
+          
         </div>
         
 </div>

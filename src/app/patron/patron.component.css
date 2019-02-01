@@ -65,3 +65,16 @@ padding: 20px 0;
     text-decoration: none;
    
   }
+  #listitemone, #listitemtwo, #listitemthree, #listitemfour{
+    border: none;
+    font-size: 25px;
+    background-color: rgb(84,117,95);
+    color: white;
+    padding: 10px 0 10px 0;
+    width: 100%;
+    text-align: left;
+  }
+
+  #listitemone:hover, #listitemtwo:hover, #listitemthree:hover, #listitemfour:hover {
+    color: rgb(0,183,243);
+  }
