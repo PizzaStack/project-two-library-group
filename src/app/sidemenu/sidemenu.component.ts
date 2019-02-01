@@ -6,7 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sidemenu.component.css']
 })
 export class SidemenuComponent implements OnInit {
-listitemone = 'News';
+
+  itemone = "News";
+
   constructor() { }
 
   ngOnInit() {

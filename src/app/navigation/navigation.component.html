@@ -1,4 +1,4 @@
-<div class="topnav"  *ngIf="!isUserLoggedIn">
+<div class="topnav">
     <nav>
 <ul>
    <li>
@@ -7,18 +7,26 @@
    <li>
      <a href="#news">News</a>
      </li>
-     <input type="text" placeholder="Search Books.." id="searchinput">
+     <app-search-books ></app-search-books>
+     <!-- <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+     <input type="text" formControlName="searchBooks" class="form-control" placeholder="Search Books.." id="searchinput" (event)="onSerachType($event.target.value)">
      <button type="button" value="Search Books" id="searchBooks">Search</button>
+     </form> -->
      
  <li style="float:right">
-   <!-- <a routerLink="/login" >Login</a> -->
-   <input type="button" onclick="document.getElementById('id01').style.display='block'" value="Login" id="loginbutton">
+    <a routerLink="/login"  >Login</a>
+   <!-- <input type="button" onclick="document.getElementById('id01').style.display='block'" value="Login" id="loginbutton"> -->
  </li>  
+ <li style="float: right" >
+    <a routerLink="/logout" >Log Out</a>
+  </li> 
+
 </ul>
 </nav>
 </div>
 
-<div class="topnav" *ngIf="isUserLoggedIn">
+<!-- <div class="topnav" *ngIf="isUserLoggedIn">
+  
  <nav >
  <ul>
      <li>
@@ -30,9 +38,10 @@
        <input type="text" placeholder="Search Books..">
        <button type="button" value="Search Books" id="searchBooks">Search</button>
        
-   <li style="float:right">
-     <a routerLink="/login">Logout</a>
-   </li>  
+   
+   <li style="float: right" *ngIf="isUserLoggedIn">
+    <a reouterLink ="/logout">Log Out</a>
+  </li> 
  </ul>
- </nav>
- </div>
+ </nav> 
+ </div>-->
