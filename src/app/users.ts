@@ -1,8 +1,8 @@
 export class User{
     constructor(
-    username: string,
+    public username: string,
     password: string,
-    userID: number,
-    isLibrarian: boolean
+    public userID: number,
+    public isLibrarian: boolean
     ){}
 }

@@ -2,7 +2,7 @@ export class book{
     constructor(
     public bookid: number,
     public title: string,
-    public author: number,
+    public author: string,
     public isbn: number,
     public keyword1: number,
     public keyword2: number,

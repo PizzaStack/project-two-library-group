@@ -21,6 +21,7 @@ import { AuthenticationService} from './_services/authentication.service'
 import { RegisterNewPatronComponent } from './register-new-patron/register-new-patron.component';
 import { SearchBooksComponent } from './search-books/search-books.component';
 import { ShowBookComponent } from './show-book/show-book.component';
+import { LogoutComponent } from './logout/logout.component';
 
 // import { LibrarianComponent } from './librarian/librarian.component';
 // import { NavigationComponent } from './navigation/navigation.component';
@@ -47,7 +48,7 @@ const ROUTES: Route[] = [
      NavigationComponent, 
      RegisterNewPatronComponent, 
      SearchBooksComponent, 
-     ShowBookComponent,
+     ShowBookComponent, LogoutComponent,
      
   ],
   imports: [

@@ -16,6 +16,7 @@ export class SearchBooksComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   bookInfo: any;
+  
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,11 +29,14 @@ export class SearchBooksComponent implements OnInit {
     this.searchForm = this.formBuilder.group({
       searchBooks: ['', Validators.required]
   });
+  
+    
   }
   get f() { return this.searchForm.controls; }
 
-  onSubmit() {
-    this.submitted = true;
+  onSubmitb() {
+
+    // this.submitted = false;
 
     // stop here if form is invalid
     if (this.searchForm.invalid) {
@@ -47,6 +51,8 @@ export class SearchBooksComponent implements OnInit {
                      this.bookInfo = (data);
                      console.log(this.bookInfo.title);
                     this.router.navigate(['showBook']);
+                    if(this.loading)
+                    window.location.reload();
                 },
                 error => {
                     //this.alertService.error(error);
@@ -54,4 +60,34 @@ export class SearchBooksComponent implements OnInit {
                 });
             }
 
+            searchbook(entry): void {
+                this.searchbook = entry;
+            }
+
+            onSubmita() {
+
+                // this.submitted = false;
+            
+                // stop here if form is invalid
+                if (this.searchForm.invalid) {
+                    return;
+                }
+              
+                    this.loading = true;
+                    this.authenticationService.author(this.f.searchBooks.value)
+                        .pipe(first())
+                        .subscribe(
+                            data => {
+                                 this.bookInfo = (data);
+                                 console.log(this.bookInfo.title);
+                                this.router.navigate(['showBook']);
+                                
+                                window.location.reload();
+                            },
+                            error => {
+                                //this.alertService.error(error);
+                                this.loading = false;
+                            });
+                        }
+            
 }
