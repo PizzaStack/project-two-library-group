@@ -48,8 +48,12 @@ public class BookController {
 	}
 	@GetMapping("/Book/author/{author}")
 	@CrossOrigin(origins = "http://localhost.4200")
-	public Book findBookByAuthor(@PathVariable("author")String author) {
-		return dao.findByAuthor(author);
+	public Object findBookByAuthor(@PathVariable("author")String author) {
+		Book book =  dao.findByAuthor(author);
+		if(book == null) {
+			return "No Maching books found";
+		}
+		return book;
 	}
 	@GetMapping("Book/parameter/{parameter}")
 	@CrossOrigin(origins = "http://localhost.4200")
@@ -75,6 +79,9 @@ public class BookController {
 	public String getBooksByLoggedInUser(HttpSession session ){
 		int patronID = (int) session.getAttribute("userID");
 		List<Book>books =  dao.getBooksByLoggedInPatron(patronID);
+		if(books.isEmpty()) {
+			return "You don't have any books that are not checked out";
+		}
 		for(Book book: books) {
 			book.setPatron(null);
 		}
@@ -86,6 +93,9 @@ public class BookController {
 	public String getBooksByPatronUsername(@PathVariable("patronUsername")String patronUsername) {
 		int patronID = luDao.getUserIdByUsername(patronUsername);
 		List<Book>books =  dao.getBooksByLoggedInPatron(patronID);
+		if(books.isEmpty()) {
+			return "This patron doesn't have any books checked out";
+		}
 		for(Book book: books) {
 			book.setPatron(null);
 		}
@@ -126,12 +136,12 @@ public class BookController {
 			return "This book doesn't exist in the library database";
 		}
 		if(book.getDatecheckedout().before(date)) {
-			return "This book is already currently checked out";
+			return "This book is already currently in the library catalog";
 		}
 		book.setDatecheckedout(date);
 		book.setPatron(pDao.findByPatronID(0));
 		dao.save(book);
-		return "Your book was successfully checked out.";
+		return "Book was successfully returned";
 	}
 	@GetMapping("Book/GetBooksCheckedOut")
 	@CrossOrigin(origins = "http://localhost.4200")
