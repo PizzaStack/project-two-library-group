@@ -48,6 +48,8 @@ export class ShowBookComponent implements OnInit {
   }
 
   getCurrentBook(){
+    currentBook: any;
+     forEach( currentBook in this.current){}
     this.current = this.getLocalBook();
     this.title = this.current.title;
     this.author = this.current.author;

@@ -49,11 +49,13 @@ export class AuthenticationService {
     }
 
     logout() {
+        
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
         localStorage.removeItem("currentBook");
         localStorage.removeItem("currentBookAuthor");
-    }
+        return this.http.get<any>('http://localhost:8080/LoginUser/Logout');
+        }
 
     search(bookTitle: string){
         return this.http.get<any>(this.bookURL.concat(bookTitle),httpOptions)
