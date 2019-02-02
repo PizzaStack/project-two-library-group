@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { getLocalRefs } from '@angular/core/src/render3/discovery_utils';
 import {book} from '../books'
 import{keyWords} from '../keywords'
+import { AuthService } from "../_services/auth.service";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-show-book',
   templateUrl: './show-book.component.html',
   styleUrls: ['./show-book.component.css'],
   template:`
+  <div class="book">
   <h2>Book Title: {{title}}</h2>
 <input type="hidden"  value="Book Title: {{title}}" >
 <h3><img src="{{coverimageurl}}" height="500"></h3>
@@ -15,7 +18,8 @@ import{keyWords} from '../keywords'
 <h3>ISBN: {{isbn}}</h3>
 <h3>Description: {{description}}</h3>
 <h3>Keywords {{keyword1}}, {{keyword2}}, {{keyword3}}</h3>
-<button *ngIf="isloggedin">Checkout Book</button>`
+<button *ngIf="(isLoggedIn | async)">Checkout Book</button>
+</div>`
 })
 export class ShowBookComponent implements OnInit {
   
@@ -30,9 +34,11 @@ export class ShowBookComponent implements OnInit {
    coverimageurl: string;
    description: string;
   ISBN : any;
+
+  isLoggedIn : Observable<boolean>;
   
-  constructor() {
-    
+  constructor(private authService: AuthService) {
+    this.isLoggedIn = authService.isLoggedIn();
    }
 
   ngOnInit() {

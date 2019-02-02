@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Route, RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
-import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
+//import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
 import { HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -58,7 +58,7 @@ const ROUTES: Route[] = [
     ReactiveFormsModule,
     RouterModule,
     AppRoutingModule,
-    TextInputAutocompleteModule
+    //TextInputAutocompleteModule
     ],
   providers: [AuthenticationService],
   bootstrap: [AppComponent]

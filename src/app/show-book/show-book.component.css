@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Average');
+.book{
+    margin: 0 auto;
+}
+
+h2{
+    font-size: 35px;
+    font-family: 'Average', serif;
+}

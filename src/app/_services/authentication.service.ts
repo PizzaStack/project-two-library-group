@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import {book} from '../books'
+import {AuthService} from './auth.service'
 
 
 const
@@ -22,7 +23,7 @@ export class AuthenticationService {
         return this.loggedIn.asObservable(); // {2}
       }
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private auth : AuthService) { }
 
    
    url: string = 'http://localhost:8080/LoginUser/';
@@ -31,7 +32,7 @@ export class AuthenticationService {
 
     login(userName: string, password: string) {
         if (userName !== '' && password !== '' ) { // {3}
-      this.loggedIn.next(true);
+      this.auth.login();
          }
       
         return this.http.get<any>(this.url.concat( userName + "/" + password))
