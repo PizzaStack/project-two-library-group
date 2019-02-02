@@ -61,7 +61,7 @@ Logs user in, saves their variables into session in backend. If user does not ex
 Logs user out, kills session data in backend. Returns string "You are logged out";
 
 @GetMapping("/LoginUser/Info")
-Returns JSON object representing info of the logged in user. If the user is a librarian, the following example is returned:
+Returns JSON object representing info of the logged in user. This mapping will only worked if you logged in first. If the user is a librarian, the following example is returned:
 {
     "firstName": "Jason",
     "password": "truepassword",
