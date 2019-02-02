@@ -1,7 +1,13 @@
 ## Mappings Documentation:
-@GetMapping("/Book/title/{title}")
-Returns a book by passing it's title. If it's found, it returns a JSON object representation of book as seen below. Otherwise it returns string "No matching books found" {
-    "bookID": 24,
+@GetMapping("/Book/title/{title}")****DEPRECATED******use GetMapping("Book/parameter/{parameter}" instead*******
+Returns a book by passing it's title. Otherwise it returns string "No matching books found" 
+   
+@GetMapping("Book/author/{author});****DEPRECATED******use GetMapping("Book/parameter/{parameter}" instead*******
+Same response as mapping above this one, except you pass in an author and it searches for that, instead of by title.
+
+@GetMapping("Book/parameter/{parameter}")
+Returns json representation of books. You pass in a paramater that is matched against author, title, or keyword. If no books are found by passed parameter, return string "Sorry no books where found with matching criteria". Example of JSON representation of book found: 
+ "bookID": 24,
     "title": "Dracula",
     "author": "Bram Stoker",
     "ibsn": 9780486454016,
@@ -28,11 +34,6 @@ Returns a book by passing it's title. If it's found, it returns a JSON object re
     },
     "datecheckedout": "2019-01-31T06:00:00.000+0000"
 }
-@GetMapping("Book/author/{author});
-Same response as mapping above this one, except you pass in an author and it searches for that, instead of by title.
-
-@GetMapping("Book/parameter/{parameter}")
-Returns json representation of books. You pass in a paramater that is matched against author, title, or keyword. If no books are found by passed parameter, return string "Sorry no books where found with matching criteria"
 
 @GetMapping("Book/LoggedInPatron")
 Returns json representation of books that are checked out by the logged in Patron. Otherwise it returns string "You don't have any books that are not checked out"
