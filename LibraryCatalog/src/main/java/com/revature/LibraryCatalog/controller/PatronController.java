@@ -32,7 +32,7 @@ public class PatronController {
 	LoginUserDao luDao;
 	
 	@GetMapping("/Patrons")
-	@CrossOrigin(origins = "http://localhost.4200")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public List<Patron> getAll(){
 		return dao.findAll();
 	}
@@ -51,12 +51,12 @@ public class PatronController {
 		return patronInformation;
 	}*/
 	@GetMapping("/Patrons/{patronID}")
-	@CrossOrigin(origins = "http://localhost.4200")
+	@CrossOrigin(origins = "http://localhost:4200")
 		public Patron getPatron(@PathVariable("patronID")int patronID) {
 			return dao.findByPatronID(patronID);
 		}
 	@GetMapping("/Patrons/CreateNewPatron/{username}/{password}/{firstName}/{lastName}/{phoneNumber}/{address}/{emailAddress}")
-	@CrossOrigin(origins = "http://localhost.4200")
+	@CrossOrigin(origins = "http://localhost:4200")
 		public String createPatron(@PathVariable("username")String username, @PathVariable("password")String password,
 				@PathVariable("firstName")String firstName, @PathVariable("lastName") String lastName, 
 				@PathVariable("phoneNumber")Long phoneNumber, @PathVariable("address") String address,
@@ -83,7 +83,7 @@ public class PatronController {
 			return response;
 	}
 	@GetMapping("/Patrons/UpdatePatronInfo/{username}/{password}/{firstname}/{lastname}/{phoneNumber}/{address}/{emailAddress}")
-	@CrossOrigin(origins = "http://localhost.4200")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public String updatePatronUserInfo(@PathVariable("username")String username, @PathVariable("password")String password,
 			@PathVariable("firstName")String firstName, @PathVariable("lastName") String lastName, 
 			@PathVariable("phoneNumber")Long phoneNumber, @PathVariable("address") String address,

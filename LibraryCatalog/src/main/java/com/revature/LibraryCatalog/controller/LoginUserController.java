@@ -36,7 +36,7 @@ public class LoginUserController {
 	
 	
 	@GetMapping("/LoginUser/{username}/{password}")
-	@CrossOrigin(origins = "http://localhost.4200")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public Object logUserIn(@PathVariable("username") String username, @PathVariable("password") String password,
 			HttpSession session) {
 		LoginUser lu = dao.getByUsernameAndPassword(username, password);
@@ -53,7 +53,7 @@ public class LoginUserController {
 		
 	}
 	@GetMapping("/LoginUser/Logout")
-	@CrossOrigin(origins = "http://localhost.4200")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public String logUserOut(HttpSession session) {
 		session.invalidate();
 		//return dao.getById(12);
@@ -61,7 +61,7 @@ public class LoginUserController {
 		
 	}
 	@GetMapping("/LoginUser/Info")
-	@CrossOrigin(origins = "http://localhost.4200")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public Object getUserInformation(HttpSession session){
 		int userID = 0;
 		userID = (int) session.getAttribute("userID");
