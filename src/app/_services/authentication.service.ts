@@ -10,7 +10,9 @@ const
 httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'
+      'Access-Control-Allow-Origin': '*', 
+'Access-Control-Allow-Methods': 'HEAD, GET, POST, PUT, PATCH, DELETE',
+'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
     })
    };
 
@@ -27,7 +29,7 @@ export class AuthenticationService {
 
    
    url: string = 'http://localhost:8080/LoginUser/';
-    bookURL: string = 'http://localhost:8080/Book/';
+    bookURL: string = 'http://localhost:8080/Book/parameter/';
     authorURL: string = 'http://localhost:8080/Book/author';
 
     login(userName: string, password: string) {
@@ -57,20 +59,13 @@ export class AuthenticationService {
         return this.http.get<any>('http://localhost:8080/LoginUser/Logout');
         }
 
-    search(bookTitle: string){
-        return this.http.get<any>(this.bookURL.concat(bookTitle),httpOptions)
+    search(bookParameter: string){
+        return this.http.get<any>(this.bookURL.concat(bookParameter),httpOptions)
         .pipe(map(book => {
+            
             if(book){
+                
               localStorage.setItem("currentBook", JSON.stringify(book));
-            }
-            return book;
-        }));
-    }
-    author(bookAuthor: string){
-        return this.http.get<any>(this. authorURL.concat(bookAuthor),httpOptions)
-        .pipe(map(book => {
-            if(book){
-              localStorage.setItem("currentBookAuthor", JSON.stringify(book));
             }
             return book;
         }));
