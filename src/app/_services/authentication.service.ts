@@ -26,8 +26,9 @@ export class AuthenticationService {
 
    
    url: string = 'http://localhost:8080/LoginUser/';
-    bookURL: string = 'http://localhost:8080/Book/';
+    bookURL: string = 'http://localhost:8080/Book/title/';
     authorURL: string = 'http://localhost:8080/Book/author';
+    userinfoURL: string= 'http://localhost:8080/LoginUser/Info'
 
     login(userName: string, password: string) {
         if (userName !== '' && password !== '' ) { // {3}
@@ -41,11 +42,26 @@ export class AuthenticationService {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     
                      localStorage.setItem("currentuser", JSON.stringify(user));
+                     this.setInfo();
                 }
                 console.log(user);
                 return user;
             }));
     }
+
+    setInfo() {
+        
+            return this.http.get<any>(this.userinfoURL)
+            .pipe(map(info => {
+                if(info) {
+                    localStorage.setItem("userinfo", JSON.stringify(info));
+                }
+                console.log(info);
+                return info;
+            }));
+        
+        
+    };
 
     logout() {
         // remove user from local storage to log user out

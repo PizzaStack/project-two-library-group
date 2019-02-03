@@ -34,7 +34,7 @@ public class LoginUserController {
 	
 	
 	@GetMapping("/LoginUser/{username}/{password}")
-	@CrossOrigin(origins = "http://localhost.4200")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public Object logUserIn(@PathVariable("username") String username, @PathVariable("password") String password,
 			HttpSession session) {
 		LoginUser lu = dao.getByUsernameAndPassword(username, password);

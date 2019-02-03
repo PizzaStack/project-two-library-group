@@ -1,6 +1,5 @@
 import { Component, OnInit, NgModule, ElementRef, ViewChild } from '@angular/core';
-
-
+import { userInfo } from '../userInfo';
 
 @Component({
   selector: 'app-patron',
@@ -9,8 +8,12 @@ import { Component, OnInit, NgModule, ElementRef, ViewChild } from '@angular/cor
 })
 export class PatronComponent implements OnInit {
   
- 
-  
+  firstname: string; 
+  lastname: string; 
+  address: string; 
+  phonenumber: number; 
+  emailaddress: string;
+  info: userInfo;
   listitemtwo = 'Account Information';
   listitemthree = 'Request a Book';
   listitemfour = 'Dashboard';
@@ -22,13 +25,21 @@ export class PatronComponent implements OnInit {
   };
 
   ngOnInit() {
-    
+    this.info = JSON.parse(localStorage.getItem("userInfo"));
+    this.firstname = this.info.firstName;
+    this.lastname = this.info.lastName;
+    this.address = this.info.address;
+    this.emailaddress = this.info.emailAddress;
+    this.phonenumber = this.info.phoneNumber;
   };
   
   @ViewChild('patronbody') bodyDiv: ElementRef;
  
  viewAccountInfo() {
-  this.bodyDiv.nativeElement.innerHTML = '<h3>Account Information</h3><label>Name:</label><span #name></span><br><br><label>Phone Number:</label><span #number></span><br><br><label>Email Address:</label><span #email></span><br><br><label>Address:</label><span #address></span>';
+  this.bodyDiv.nativeElement.innerHTML = `<h3>Account Information</h3><label>Name:</label><span #name>${this.firstname}</span><br><br>
+  <label>Phone Number:</label><span #number>${this.phonenumber}</span><br><br>
+  <label>Email Address:</label><span #email>${this.emailaddress}</span><br><br>
+  <label>Address:</label><span #address>${this.address}</span>`;
   
 };
 requestBook() {
