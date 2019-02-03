@@ -52,6 +52,7 @@ public class LoginUserController {
 		}
 		
 	}
+	
 	@GetMapping("/LoginUser/Logout")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public String logUserOut(HttpSession session) {
@@ -60,14 +61,49 @@ public class LoginUserController {
 		return "You are logged out";
 		
 	}
-	@GetMapping("/LoginUser/Info")
+
+	
+	  @GetMapping("/LoginUser/Info")
+	  @CrossOrigin(origins = "http://localhost:4200") 
+	  public Object getUserInformation(HttpSession session){ 
+		  int userID = 0; 
+		  userID = (int)session.getAttribute("userID"); 
+		  HashMap<String, Object> loginInfo = new HashMap<String, Object>(); 
+		  if((boolean) session.getAttribute("isLibrarian")){ 
+			 Object obj = lDao.GetLibrarianInfo(userID); Gson gson = new Gson(); 
+			 String json = gson.toJson(obj); 
+			 json = json.substring(1, json.length()-2).replace("\"", ""); 
+			 String values[] = json.split(","); 
+			 loginInfo.put("firstName", values[0]); 
+			 loginInfo.put("lastname", values[1]);
+			 loginInfo.put("usernametname", values[2]); 
+			 loginInfo.put("password", values[3]); 
+			 return loginInfo; 
+			 } 
+		  else { 
+			 Object obj = pDao.GetPatronInfo(userID); 
+			 Gson gson = new Gson(); String json = gson.toJson(obj); 
+			 json = json.substring(1, json.length()-2).replace("\"",""); 
+			 String values[] = json.split(","); loginInfo.put("firstName",values[0]); 
+			 loginInfo.put("lastName", values[1]); 
+			 loginInfo.put("username",values[2]); 
+			 loginInfo.put("password", values[3]); 
+			 loginInfo.put("address",values[4]); 
+			 loginInfo.put("phoneNumber", Long.parseLong(values[5]));
+			 loginInfo.put("emailAddress", values[6]); return loginInfo; 
+			 } 
+		 }
+	 
+	@GetMapping("/{username}/info")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public Object getUserInformation(HttpSession session){
-		int userID = 0;
-		userID = (int) session.getAttribute("userID");
+	public Object getUserInformation(@PathVariable("username") String username) {
+		LoginUser lu = dao.findByUsername(username);
+		if(lu == null) {
+			return "A user could not be found with this username";
+		}
 		HashMap<String, Object> loginInfo = new HashMap<String, Object>();
-		if((boolean) session.getAttribute("isLibrarian")) {
-			Object obj = lDao.GetLibrarianInfo(userID);
+		if(lu.isLibrarian()) {
+			Object obj = lDao.GetLibrarianInfo(lu.getId());
 			Gson gson = new Gson();
 			String json = gson.toJson(obj);
 			json = json.substring(1, json.length()-2).replace("\"", "");
@@ -79,7 +115,7 @@ public class LoginUserController {
 			return loginInfo;
 		}
 		else {
-			Object obj = pDao.GetPatronInfo(userID);
+			Object obj = pDao.GetPatronInfo(lu.getId());
 			Gson gson = new Gson();
 			String json = gson.toJson(obj);
 			json = json.substring(1, json.length()-2).replace("\"", "");
@@ -94,6 +130,5 @@ public class LoginUserController {
 			return loginInfo;		
 		}
 	}
-	
 	
 }
