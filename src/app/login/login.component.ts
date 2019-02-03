@@ -80,11 +80,11 @@ export class LoginComponent implements OnInit {
                      this.usersInfo = (data);
                     
                     if(this.usersInfo.librarian){       
-                        this.loggedIn.next(true);
+                    
                     this.router.navigate(['/librarian']);
                     }else                
-                    this.loggedIn.next(true);
-                    this.router.navigate(['patron']);
+            
+                    this.router.navigate(['/patron']);
                 },
                 error => {
                     //this.alertService.error(error);

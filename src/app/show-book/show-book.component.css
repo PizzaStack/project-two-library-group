@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css?family=Average');
+.book{
+    margin: 0 auto;
+}
+
+h2{
+    font-size: 35px;
+    font-family: 'Average', serif;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  button:hover {
+    opacity: 0.8;
+  }
+
+  .thumbnail:hover {
+    position:relative;
+    top:-25px;
+    left:-35px;
+    width:500px;
+    height:auto;
+    display:block;
+    z-index:999;
+}
+  

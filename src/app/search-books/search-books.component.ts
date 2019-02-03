@@ -49,9 +49,9 @@ export class SearchBooksComponent implements OnInit {
             .subscribe(
                 data => {
                      this.bookInfo = (data);
-                     console.log(this.bookInfo.title);
+                     console.log(this.bookInfo);
                     this.router.navigate(['showBook']);
-                    if(this.loading)
+                    //if(this.loading)
                     window.location.reload();
                 },
                 error => {
@@ -64,30 +64,6 @@ export class SearchBooksComponent implements OnInit {
                 this.searchbook = entry;
             }
 
-            onSubmita() {
-
-                // this.submitted = false;
             
-                // stop here if form is invalid
-                if (this.searchForm.invalid) {
-                    return;
-                }
-              
-                    this.loading = true;
-                    this.authenticationService.author(this.f.searchBooks.value)
-                        .pipe(first())
-                        .subscribe(
-                            data => {
-                                 this.bookInfo = (data);
-                                 console.log(this.bookInfo.title);
-                                this.router.navigate(['showBook']);
-                                
-                                window.location.reload();
-                            },
-                            error => {
-                                //this.alertService.error(error);
-                                this.loading = false;
-                            });
-                        }
             
 }

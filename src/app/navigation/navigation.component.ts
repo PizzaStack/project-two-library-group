@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService } from '../_services/authentication.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { AuthService } from "../_services/auth.service";
+
 
 
 @Component({
@@ -12,19 +14,16 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class NavigationComponent implements OnInit {
 
-  private loggedIn = new BehaviorSubject<boolean>(false);
-
-  get isLoggedIn() {
-      return this.loggedIn.asObservable(); // {2}
-    }
-
-  isLoggedIn$: Observable<boolean>; 
+  isLoggedIn : Observable<boolean>;
 
   
-  constructor(private authenticationService: AuthenticationService) { }
+
+   constructor(private authenticationService: AuthenticationService, public authService : AuthService) { 
+    this.isLoggedIn = authService.isLoggedIn();
+   }
 
   ngOnInit() {
-    this.isLoggedIn$ = this.authenticationService.isLoggedIn;
+    
   }
 
 }

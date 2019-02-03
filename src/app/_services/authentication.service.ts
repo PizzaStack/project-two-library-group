@@ -3,13 +3,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import {book} from '../books'
+import {AuthService} from './auth.service'
 
 
 const
 httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'
+      'Access-Control-Allow-Origin': '*', 
+'Access-Control-Allow-Methods': 'HEAD, GET, POST, PUT, PATCH, DELETE',
+'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
     })
    };
 
@@ -22,17 +25,17 @@ export class AuthenticationService {
         return this.loggedIn.asObservable(); // {2}
       }
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private auth : AuthService) { }
 
    
    url: string = 'http://localhost:8080/LoginUser/';
-    bookURL: string = 'http://localhost:8080/Book/title/';
+    bookURL: string = 'http://localhost:8080/Book/parameter/';
     authorURL: string = 'http://localhost:8080/Book/author';
     userinfoURL: string= 'http://localhost:8080/LoginUser/Info'
 
     login(userName: string, password: string) {
         if (userName !== '' && password !== '' ) { // {3}
-      this.loggedIn.next(true);
+      this.auth.login();
          }
       
         return this.http.get<any>(this.url.concat( userName + "/" + password))
@@ -64,26 +67,21 @@ export class AuthenticationService {
     };
 
     logout() {
+        
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
         localStorage.removeItem("currentBook");
         localStorage.removeItem("currentBookAuthor");
-    }
+        return this.http.get<any>('http://localhost:8080/LoginUser/Logout');
+        }
 
-    search(bookTitle: string){
-        return this.http.get<any>(this.bookURL.concat(bookTitle),httpOptions)
+    search(bookParameter: string){
+        return this.http.get<any>(this.bookURL.concat(bookParameter),httpOptions)
         .pipe(map(book => {
+            
             if(book){
+                
               localStorage.setItem("currentBook", JSON.stringify(book));
-            }
-            return book;
-        }));
-    }
-    author(bookAuthor: string){
-        return this.http.get<any>(this. authorURL.concat(bookAuthor),httpOptions)
-        .pipe(map(book => {
-            if(book){
-              localStorage.setItem("currentBookAuthor", JSON.stringify(book));
             }
             return book;
         }));

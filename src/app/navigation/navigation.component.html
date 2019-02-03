@@ -14,11 +14,11 @@
      </form> -->
      
  <li style="float:right">
-    <a routerLink="/login"  >Login</a>
+    <a routerLink="/login"  *ngIf="!(isLoggedIn | async)">Login</a>
    <!-- <input type="button" onclick="document.getElementById('id01').style.display='block'" value="Login" id="loginbutton"> -->
  </li>  
  <li style="float: right" >
-    <a routerLink="/logout" >Log Out</a>
+    <a routerLink="/logout" *ngIf="(isLoggedIn | async)">Log Out</a>
   </li> 
 
 </ul>

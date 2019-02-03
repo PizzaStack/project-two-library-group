@@ -1,74 +1,47 @@
 import { Component, OnInit } from '@angular/core';
-import { getLocalRefs } from '@angular/core/src/render3/discovery_utils';
-import {book} from '../books'
-import{keyWords} from '../keywords'
+import { AuthService } from "../_services/auth.service";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-show-book',
   templateUrl: './show-book.component.html',
   styleUrls: ['./show-book.component.css'],
-  template:`
-  <h2>Book Title: {{title}}</h2>
-<input type="hidden"  value="Book Title: {{title}}" >
-<h3><img src="{{coverimageurl}}" height="500"></h3>
-<h3>Author: {{author}}</h3>
-<h3>ISBN: {{isbn}}</h3>
-<h3>Description: {{description}}</h3>
-<h3>Keywords {{keyword1}}, {{keyword2}}, {{keyword3}}</h3>
-<button *ngIf="isloggedin">Checkout Book</button>`
+   template:`
+   <table style="width:100%">
+      <thead style="background-color:white">
+          <th>Book Title</th>
+          <th>Book Author</th>
+          <th>Book ISBN</th>          
+          <th>Book Image</th>
+          <th>Keywords</th>
+          <th>Book Description</th>
+          <th *ngIf="(isLoggedIn | async)">Check Out Book</th>
+      </thead>
+      <tbody style="width:100%">
+      <tr *ngFor="let books of currentBook" style="background-color:goldenrod; border: 3px solid black;height:50px">
+          <td style="width:75px; padding: 5px"><b>{{books.title}}</b></td>
+          <td style="width:150px; padding: 5px; text-align: center">{{books.author}}</td>
+          <td style="padding:5px">{{books.ibsn}}</td>          
+          <td style="padding: 5px"><a href="{{books.coverimageurl}}"><img src="{{books.coverimageurl}}" alt="Book Cover Image" height="200"></a></td>
+          <td style="padding: 0 5px">{{books.keyword1.value}}, {{books.keyword2.value}}, {{books.keyword3.value}}</td>
+          <td style="max-height:15px; padding: 5px; text-align:justify"  >{{books.description}}</td>
+          <td class="button" style="padding: 0 5px"><button *ngIf="(isLoggedIn | async)">Checkout Book</button></td>
+      </tr>
+      </tbody>
+      </table>
+ `
 })
 export class ShowBookComponent implements OnInit {
   
-  current:book;
-  currentKeywords:keyWords;
-  title : string;  
-  author: string;
-   isbn: number;
-   keyword1: number;
-   keyword2: number;
-   keyword3: number;
-   coverimageurl: string;
-   description: string;
-  ISBN : any;
+ currentBook = JSON.parse(localStorage.getItem("currentBook"));
+  isLoggedIn : Observable<boolean>;
   
-  constructor() {
-    
+  constructor(authService: AuthService) {
+    this.isLoggedIn = authService.isLoggedIn();
    }
 
   ngOnInit() {
-    
-   this.getCurrentBook();
-   
   }
 
-  getCurrentBook(){
-    this.current = this.getLocalBook();
-    this.title = this.current.title;
-    this.author = this.current.author;
-    this.isbn = this.current.ibsn;
-    this.coverimageurl = this.current.coverimageurl;
-    this.description = this.current.description;
-    
-    let keywords1 = JSON.stringify(this.current.keyword1);
-    let keywords2 = JSON.stringify(this.current.keyword2);
-    let keywords3 = JSON.stringify(this.current.keyword3);
-    let keyword_1 = JSON.parse(keywords1);
-    let keyword_2 = JSON.parse(keywords2);
-    let keyword_3 = JSON.parse(keywords3);
-    this.keyword1 = keyword_1.value;
-    this.keyword2 = keyword_2.value;
-    this.keyword3 = keyword_3.value;
-  }
-
-  getLocalBook() : book{ 
   
-  var currentBook = JSON.parse(localStorage.getItem("currentBook"));
-  var currentKeywords = JSON.parse(localStorage.getItem("currentBook"));
-  // if(currentBook == null)
-  // alert("Book is not currently available in the library");
-  // else{
-  console.log(currentBook);
-  return currentBook;
-  }
-  //}
 }
