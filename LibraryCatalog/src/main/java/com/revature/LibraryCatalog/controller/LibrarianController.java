@@ -24,12 +24,12 @@ public class LibrarianController {
 	LoginUserDao luDao;
 	
 	@GetMapping("/Librarian/{librarianID}")
-	@CrossOrigin(origins = "http://localhost.4200")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public Object GetLibrarianInformation(@PathVariable("librarianID") int librarianID){
 		return dao.GetLibrarianInfo(librarianID);
 	}
 	@GetMapping("/LoginUser/UpdateLibrarianInfo/{username}/{password}/{firstName}/{lastName}")
-	@CrossOrigin(origins = "http://localhost.4200")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public String updateLibraryUserInfo(@PathVariable("username") String username, @PathVariable("password") String password,
 			@PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName, HttpSession session) {
 			int librarianID = (int) session.getAttribute("userID");

@@ -1,5 +1,6 @@
 package com.revature.LibraryCatalog.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.gson.Gson;
 import com.revature.LibraryCatalog.dao.LibrarianDao;
 import com.revature.LibraryCatalog.dao.LoginUserDao;
 import com.revature.LibraryCatalog.dao.PatronDao;
@@ -51,22 +53,45 @@ public class LoginUserController {
 		
 	}
 	@GetMapping("/LoginUser/Logout")
-	@CrossOrigin(origins = "http://localhost.4200")
-	public LoginUser logUserOut(HttpSession session) {
+	@CrossOrigin(origins = "http://localhost:4200")
+	public String logUserOut(HttpSession session) {
 		session.invalidate();
-		return dao.getById(12);
+		//return dao.getById(12);
+		return "You are logged out";
 		
 	}
 	@GetMapping("/LoginUser/Info")
-	@CrossOrigin(origins = "http://localhost.4200")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public Object getUserInformation(HttpSession session){
 		int userID = 0;
 		userID = (int) session.getAttribute("userID");
+		HashMap<String, Object> loginInfo = new HashMap<String, Object>();
 		if((boolean) session.getAttribute("isLibrarian")) {
-			return lDao.GetLibrarianInfo(userID);
+			Object obj = lDao.GetLibrarianInfo(userID);
+			Gson gson = new Gson();
+			String json = gson.toJson(obj);
+			json = json.substring(1, json.length()-2).replace("\"", "");
+			String values[] = json.split(",");
+			loginInfo.put("firstName", values[0]);
+			loginInfo.put("lastname", values[1]);
+			loginInfo.put("usernametname", values[2]);
+			loginInfo.put("password", values[3]);
+			return loginInfo;
 		}
 		else {
-			return pDao.GetPatronInfo(userID);
+			Object obj = pDao.GetPatronInfo(userID);
+			Gson gson = new Gson();
+			String json = gson.toJson(obj);
+			json = json.substring(1, json.length()-2).replace("\"", "");
+			String values[] = json.split(",");
+			loginInfo.put("firstName", values[0]);
+			loginInfo.put("lastName", values[1]);
+			loginInfo.put("username", values[2]);
+			loginInfo.put("password", values[3]);
+			loginInfo.put("address", values[4]);
+			loginInfo.put("phoneNumber", Long.parseLong(values[5]));
+			loginInfo.put("emailAddress", values[6]);
+			return loginInfo;		
 		}
 	}
 	

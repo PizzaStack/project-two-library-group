@@ -37,22 +37,23 @@ public class BookController {
 	@Autowired
 	LoginUserDao luDao;
 	
-	@GetMapping("/Book/title/{title}")
-	@CrossOrigin(origins = "http://localhost.4200")
-	public Object findBookByTitle(@PathVariable("title") String title) {
-		Book book = dao.findByTitle(title);
-		if(book == null) {
-			return "No matching books found";
-		}
-		return book;
-	}
-	@GetMapping("/Book/author/{author}")
-	@CrossOrigin(origins = "http://localhost.4200")
-	public Book findBookByAuthor(@PathVariable("author")String author) {
-		return dao.findByAuthor(author);
-	}
+	/*
+	 * @GetMapping("/Book/title/{title}")
+	 * 
+	 * @CrossOrigin(origins = "http://localhost.4200") public Object
+	 * findBookByTitle(@PathVariable("title") String title) { Book book =
+	 * dao.findByTitle(title); if(book == null) { return "No matching books found";
+	 * } return book; }
+	 * 
+	 * @GetMapping("/Book/author/{author}")
+	 * 
+	 * @CrossOrigin(origins = "http://localhost.4200") public Object
+	 * findBookByAuthor(@PathVariable("author")String author) { Book book =
+	 * dao.findByAuthor(author); if(book == null) { return "No Maching books found";
+	 * } return book; }
+	 */
 	@GetMapping("Book/parameter/{parameter}")
-	@CrossOrigin(origins = "http://localhost.4200")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public Object findBooksByParameter(@PathVariable("parameter")String parameter){
 		List<Book> books = dao.getBooksByParamter(parameter);
 		if(books.isEmpty()) {
@@ -71,10 +72,13 @@ public class BookController {
 	}
 	
 	@GetMapping("Book/LoggedInPatron")
-	@CrossOrigin(origins = "http://localhost.4200")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public String getBooksByLoggedInUser(HttpSession session ){
 		int patronID = (int) session.getAttribute("userID");
 		List<Book>books =  dao.getBooksByLoggedInPatron(patronID);
+		if(books.isEmpty()) {
+			return "You don't have any books that are not checked out";
+		}
 		for(Book book: books) {
 			book.setPatron(null);
 		}
@@ -82,10 +86,13 @@ public class BookController {
 		return gson.toJson(books);
 	}
 	@GetMapping("Book/Patron/{patronUsername}")
-	@CrossOrigin(origins = "http://localhost.4200")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public String getBooksByPatronUsername(@PathVariable("patronUsername")String patronUsername) {
 		int patronID = luDao.getUserIdByUsername(patronUsername);
 		List<Book>books =  dao.getBooksByLoggedInPatron(patronID);
+		if(books.isEmpty()) {
+			return "This patron doesn't have any books checked out";
+		}
 		for(Book book: books) {
 			book.setPatron(null);
 		}
@@ -94,7 +101,7 @@ public class BookController {
 	}
 	
 	@GetMapping("Book/Checkout/{title}")
-	@CrossOrigin(origins = "http://localhost.4200")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public String checkOutBook(@PathVariable("title")String title, HttpSession session) {
 		Book book = dao.findByTitle(title);
 		DateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
@@ -117,7 +124,7 @@ public class BookController {
 		return "Your book was successfully checked out.";
 	}
 	@GetMapping("Book/Return/{title}")
-	@CrossOrigin(origins = "http://localhost.4200")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public String ReturnBook(@PathVariable("title")String title) {
 		Book book = dao.findByTitle(title);
 		Date date = getLibraryStartDate();
@@ -126,15 +133,15 @@ public class BookController {
 			return "This book doesn't exist in the library database";
 		}
 		if(book.getDatecheckedout().before(date)) {
-			return "This book is already currently checked out";
+			return "This book is already currently in the library catalog";
 		}
 		book.setDatecheckedout(date);
 		book.setPatron(pDao.findByPatronID(0));
 		dao.save(book);
-		return "Your book was successfully checked out.";
+		return "Book was successfully returned";
 	}
 	@GetMapping("Book/GetBooksCheckedOut")
-	@CrossOrigin(origins = "http://localhost.4200")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public String getBooksCheckedOut() {
 		List<Book> books = dao.getBooksCheckedOut();
 		for(Book book: books) {

@@ -54,3 +54,8 @@ Justice Fears: Team Lead, git master
 Randy Missun: Test Lead 
 Jason Presher: Front End Lead
 Carlos Portillo: Back End Lead
+
+
+
+
+
