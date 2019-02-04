@@ -95,7 +95,7 @@ public class LoginUserController {
 			 } 
 		 }
 	 
-	@GetMapping("/{username}")
+	@GetMapping("/{username}/")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public Object getUserInformation(@PathVariable("username") String username) {
 		LoginUser lu = dao.findByUsername(username);

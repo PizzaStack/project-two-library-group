@@ -8,11 +8,11 @@ import { AccountinfoComponent } from "../accountinfo/accountinfo.component";
   styleUrls: ['./librarian.component.css']
 })
 export class LibrarianComponent implements OnInit {
-  patronUrl: string = 'http://localhost:8080/Patrons';
-  checkedOutBooksUrl: string = 'http://localhost:8080/Book/GetBooksCheckedOut';
-  booksByPatronUrl: string = 'http://localhost:8080/Book/Patron/';
-  returnBookUrl: string = 'http://localhost:8080/Book/Return/';
-  createPatronUrl: string = 'http://localhost:8080/Patrons/CreateNewPatron/';
+  patronUrl: string = 'http://3.16.23.149:8090/Patrons';
+  checkedOutBooksUrl: string = 'http://3.16.23.149:8090/Book/GetBooksCheckedOut';
+  booksByPatronUrl: string = 'http://3.16.23.149:8090/Book/Patron/';
+  returnBookUrl: string = 'http://3.16.23.149:8090/Book/Return/';
+  createPatronUrl: string = 'http://3.16.23.149:8090/Patrons/CreateNewPatron/';
   patronArray: any;
   booksArray: any;
   boolGetBooksWithId: boolean;

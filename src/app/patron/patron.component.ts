@@ -15,8 +15,8 @@ export class PatronComponent implements OnInit {
   listitemtwo = 'View Account Information';
   listitemthree = 'Request a Book';
   listitemfour = 'Dashboard';
-  userinfoURL: string= 'http://localhost:8080/';
-  booksByPatronUrl: string = 'http://localhost:8080/Book/Patron/';
+  userinfoURL: string= 'http://3.16.23.149:8090/';
+  booksByPatronUrl: string = 'http://3.16.23.149:8090/Book/Patron/';
   boolAccountInfo : boolean;
 
   constructor(private http: HttpClient, private router: Router) {};
@@ -53,7 +53,7 @@ dashboard(){
 };
 
 getBooksByPatron() {
-  this.http.get(this.booksByPatronUrl.concat(this.username))
+  this.http.get(this.booksByPatronUrl.concat(this.username).concat('/'))
     .subscribe((data) => {
       this.booksArray = data;
       console.log(this.booksArray);

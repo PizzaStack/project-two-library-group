@@ -9,9 +9,9 @@ import { User } from "../users";
 })
 export class AccountinfoComponent implements OnInit {
 
-  patronUpdateUrl: string = 'http://localhost:8080/Patrons/UpdatePatronInfo/';
-  librarianUpdateUrl: string = 'http://localhost:8080/LoginUser/UpdateLibrarianInfo/';
-  userinfoURL: string= 'http://localhost:8080/';
+  patronUpdateUrl: string = 'http://3.16.23.149:8090/Patrons/UpdatePatronInfo/';
+  librarianUpdateUrl: string = 'http://3.16.23.149:8090/LoginUser/UpdateLibrarianInfo/';
+  userinfoURL: string= 'http://3.16.23.149:8090/';
   userInfoFromStorage: User;
 
   username : string;
@@ -32,7 +32,7 @@ export class AccountinfoComponent implements OnInit {
   }
 
   getUserInfo(){
-    this.http.get(this.userinfoURL + this.username)
+    this.http.get(this.userinfoURL.concat(this.username).concat('/'))
     .subscribe((data) => {
       let user : any = data;
       console.log(user);

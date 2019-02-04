@@ -28,10 +28,10 @@ export class AuthenticationService {
     constructor(private http: HttpClient, private auth : AuthService) { }
 
    
-   url: string = 'http://localhost:8080/LoginUser/';
-    bookURL: string = 'http://localhost:8080/Book/parameter/';
-    authorURL: string = 'http://localhost:8080/Book/author';
-    userinfoURL: string= 'http://localhost:8080/LoginUser/Info'
+   url: string = 'http://3.16.23.149:8090/LoginUser/';
+    bookURL: string = 'http://3.16.23.149:8090/Book/parameter/';
+    authorURL: string = 'http://3.16.23.149:8090/Book/author';
+    userinfoURL: string= 'http://3.16.23.149:8090/LoginUser/Info'
 
     login(userName: string, password: string) {
         if (userName !== '' && password !== '' ) { // {3}
@@ -72,7 +72,7 @@ export class AuthenticationService {
         localStorage.removeItem('currentUser');
         localStorage.removeItem("currentBook");
         localStorage.removeItem("currentBookAuthor");
-        return this.http.get<any>('http://localhost:8080/LoginUser/Logout');
+        return this.http.get<any>('http://3.16.23.149:8090/LoginUser/Logout');
         }
 
     search(bookParameter: string){
