@@ -16,7 +16,7 @@ export class UserService {
     // }
 
     register(user: User) {
-        return this.http.post(`http://localhost:8080/users/register`, user);
+        return this.http.post(`http://3.16.23.149:8090/users/register`, user);
     }
 
     // update(user: User) {
