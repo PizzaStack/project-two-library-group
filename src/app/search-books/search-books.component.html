@@ -1,5 +1,5 @@
 <form [formGroup]="searchForm" (ngSubmit)="onSubmitb()">
-  <input type="text" formControlName="searchBooks" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.searchBooks.errors }"placeholder="Search Books.." id="searchinput" (event)="onSerachType($event.target.value)">
+  <input type="text" formControlName="searchBooks" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.searchBooks.errors }"placeholder="Search Books.." id="searchinput" >
  
  <button id="searchBooks">Search</button><br>
    </form>

@@ -1,0 +1,51 @@
+<div class="container" #l_page>
+
+  <div class="item3" id="sidebar">
+    <ul>
+      <li><button type="button" class="sidebar_option" (click)="viewAccountInfo()">Account Information</button></li>
+      <li><button type="button" class="sidebar_option" (click)="createPatronAccount()">Create a Patron Account</button></li>
+    </ul>
+  </div>
+
+  <div class="item4" #l_body>
+    <app-accountinfo [hidden]=boolAccountInfo></app-accountinfo>
+    <label><h4>List of Patrons:</h4></label>
+    <table id="patrons" #patrons>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>E-mail</th>
+        <th>Address</th>
+        <th>Phone Number</th>
+      </tr>
+      <tr *ngFor="let patron of patronArray">
+        <td>{{patron.firstName}}</td>
+        <td>{{patron.lastName}}</td>
+        <td>{{patron.emailAddress}}</td>
+        <td>{{patron.address}}</td>
+        <td>{{patron.phoneNumber}}</td>
+      </tr>
+    </table>
+    <br><br><label><h4>Checked out Books:</h4></label>
+    <input #patronUsername type="text" placeholder="Enter a username">
+    <button type="submit" (click)=getBooksByPatron(patronUsername.value)>Submit</button>
+    <button type="submit" (click)=getCheckedOutBooks()>Clear filter</button>
+    <table #books>
+      <tr>
+        <th>Cover Image</th>
+        <th>Title</th>
+        <th>Author</th>
+        <div *ngIf=boolGetBooksWithId><th>Patron ID</th></div>
+        <th>Check-out Date</th>
+      </tr>
+      <tr *ngFor="let book of booksArray">
+        <td><img src={{book.coverimageurl}} alt="Cover Image" height=100 width=100></td>
+        <td>{{book.title}}</td>
+        <td>{{book.author}}</td>
+        <div *ngIf=boolGetBooksWithId><td>{{book.patron.patronID}}</td></div>
+        <td>{{book.datecheckedout}}</td>
+        <td><button type="submit" (click)=returnBook(this)>Return Book</button></td>
+      </tr>
+    </table>
+  </div>
+</div>

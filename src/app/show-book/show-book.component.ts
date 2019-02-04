@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-show-book',
-  templateUrl: './show-book.component.html',
   styleUrls: ['./show-book.component.css'],
    template:`
    <table style="width:100%">

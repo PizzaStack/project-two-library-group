@@ -11,19 +11,21 @@
     </div>
 
       <div class="item3" id="patronbody" #patronbody>
+        <app-accountinfo [hidden]=boolAccountInfo></app-accountinfo>
           <label>Checked out books:</label><br> 
           <table id="checkedouttable">
+              <tr>
                 <th>Cover Image</th>
                 <th>Title</th>
                 <th>Author</th>
                 <th>Due Date</th>
-          </table>
-          <br><br><label>Book History:</label><br>
-          <table id="bookhistorytable">
-                <th>Cover Image</th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Check-out Date</th>
+              </tr>
+              <tr *ngFor ="let book of booksArray">
+                    <td><img src={{book.coverimageurl}} alt="Cover Image" height=100 width=100></td>
+                    <td>{{book.title}}</td>
+                    <td>{{book.author}}</td>
+                    <td>{{book.datecheckedout}}</td>
+              </tr>
           </table>
           <div #fine>
             <br><span #balance>Balance Due: $0.00</span>

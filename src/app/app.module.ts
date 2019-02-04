@@ -13,25 +13,25 @@ import { FooterComponent } from './footer/footer.component';
 import {NavigationComponent} from './navigation/navigation.component'
 //import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { HomeComponent } from './home/home.component';
-//import {LibrarianComponent} from './librarian/librarian.component'
+import {LibrarianComponent} from './librarian/librarian.component'
 import { AuthenticationService} from './_services/authentication.service'
 
 
- import { PatronComponent } from './patron/patron.component';
+import { PatronComponent } from './patron/patron.component';
 import { RegisterNewPatronComponent } from './register-new-patron/register-new-patron.component';
 import { SearchBooksComponent } from './search-books/search-books.component';
 import { ShowBookComponent } from './show-book/show-book.component';
 import { LogoutComponent } from './logout/logout.component';
+import { AccountinfoComponent } from './accountinfo/accountinfo.component';
 
-// import { LibrarianComponent } from './librarian/librarian.component';
 // import { NavigationComponent } from './navigation/navigation.component';
 
 const ROUTES: Route[] = [
  
-  // {path: 'login', component: LoginComponent},
-  // { path: 'librarian', component: LibrarianComponent},
-  // { path: 'patron', component: PatronComponent},  
-  // { path: 'home', component: HomeComponent},
+  {path: 'login', component: LoginComponent},
+  { path: 'librarian', component: LibrarianComponent},
+  { path: 'patron', component: PatronComponent},  
+  { path: 'home', component: HomeComponent},
   { path: '', component: HomeComponent, pathMatch: 'full' }
  
 ]
@@ -44,11 +44,11 @@ const ROUTES: Route[] = [
     LoginComponent,
     PatronComponent,    
     FooterComponent,     
-    //LibrarianComponent,
+    LibrarianComponent,
      NavigationComponent, 
      RegisterNewPatronComponent, 
      SearchBooksComponent, 
-     ShowBookComponent, LogoutComponent,
+     ShowBookComponent, LogoutComponent, AccountinfoComponent
      
   ],
   imports: [
