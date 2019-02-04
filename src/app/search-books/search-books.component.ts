@@ -52,7 +52,7 @@ export class SearchBooksComponent implements OnInit {
                      console.log(this.bookInfo);
                     this.router.navigate(['showBook']);
                     //if(this.loading)
-                    window.location.reload();
+                    //window.location.reload();
                 },
                 error => {
                     //this.alertService.error(error);
