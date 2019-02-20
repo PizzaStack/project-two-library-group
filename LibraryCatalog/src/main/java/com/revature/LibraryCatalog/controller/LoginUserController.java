@@ -63,7 +63,7 @@ public class LoginUserController {
 		
 	}
 
-	
+	  /*
 	  @GetMapping("/LoginUser/Info")
 	  @CrossOrigin(origins = "http://localhost:4200") 
 	  public Object getUserInformation(HttpSession session){ 
@@ -94,6 +94,7 @@ public class LoginUserController {
 			 loginInfo.put("emailAddress", values[6]); return loginInfo; 
 			 } 
 		 }
+		 */
 	 
 	@GetMapping("/{username}/")
 	@CrossOrigin(origins = "http://localhost:4200")
